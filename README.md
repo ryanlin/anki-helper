@@ -74,12 +74,15 @@ p0
 
 p1
 - Shared/Live deck collaboration.
-- Containerize app for easier setup.
 
 ### Issues
 - won't create card if note type doesn't exist
 - won't create card if deck doesn't exist
 - discord gateway api starts sending loopback warnings since app responds slowly
+
+### Improvements
+- easier developer setup process (e.g. containerize app)
+- allow natural language instruction through bot.
 
 ### Tested Configuration:
 - Anki v2.1.66+
