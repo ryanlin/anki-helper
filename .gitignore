@@ -1,6 +1,7 @@
 
 # local development environment stuff
 .venv/
+__pycache__/
 
 # tests
 my_tests/
