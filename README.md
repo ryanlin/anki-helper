@@ -4,6 +4,10 @@
 
 Self-hosted AI assistant that creates fully detailed Chinese flashcards in Anki from just 1 word. Accessible through a Discord bot and built with OpenAI's GPT family of large language models. Available as a "developer build". WIP!
 
+**Demo**
+![Anki-Helper Demo](demo/anki-helper-demo.gif)
+
+
 - [Usage](#usage)
 - [Development](#development)
 
