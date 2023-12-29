@@ -1,0 +1,4 @@
+
+# local development environment stuff
+.venv/
+_pycache_/
