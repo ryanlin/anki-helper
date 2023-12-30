@@ -81,8 +81,8 @@ p1
 - discord gateway api starts sending loopback warnings since app responds slowly
 
 ### Improvements
-- easier developer setup process (e.g. containerize app)
-- allow natural language instruction through bot.
+- easier developer setup (e.g. containerize app)
+- allow natural language instruction through bot (e.g. !add <word> with <sentence> as example)
 
 ### Tested Configuration:
 - Anki v2.1.66+

@@ -8,6 +8,10 @@ JSON_PROPERTIES_INSTRUCTION = "Your JSON should NOT include any fields other tha
 
 ANKI_HELPER_INSTRUCTION = "You are meant to create Anki cards based on the user input. The user input will be Chinese characters, or Chinese characters and/or pinyin and english."
 
+ANKI_DECKNAME_INSTRUCTION = f"In your JSON, include a top level property \"deckName\" with the value {config.DECKNAME}"
+
+ANKI_KEY_INSTRUCTION = f"In your JSON, include a property \"Key\" under \"fields\" with the same value as you would have assigned to the property \"Simplified\" that is also under \"fields\""
+
 FEW_SHOT_INSTRUCTION = """
 Examples:
 
@@ -76,16 +80,21 @@ You, the JSON machine (make sure not to add any extra fields):
 """
 
 client = OpenAI(api_key=config.OPENAI_API_KEY)
-system_prompt = f"{JSON_ONLY_INSTRUCTION}\n{JSON_PROPERTIES_INSTRUCTION}\n{ANKI_HELPER_INSTRUCTION}\n{FEW_SHOT_INSTRUCTION}\n"
+
+JSON_INSTRUCTION = f"{JSON_ONLY_INSTRUCTION}\n{JSON_PROPERTIES_INSTRUCTION}\n"
+
+ANKI_INSTRUCTION = f"{ANKI_HELPER_INSTRUCTION}"
+
+system_prompt = f"{JSON_INSTRUCTION}\n{ANKI_INSTRUCTION}\n{FEW_SHOT_INSTRUCTION}\n"
+
 def give_me_a_json(request) -> dict:
     completion = client.chat.completions.create(
-    model="gpt-4-1106-preview",
-    response_format={"type": "json_object"},
-    messages=[
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"{request}"}
-    ]
-    )
-    result = completion.choices[0].message.content
-    print(result)
-    return json.loads(result)
+        model="gpt-4-1106-preview",
+        response_format={"type": "json_object"},
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"{request}"}
+        ])
+    json_string = completion.choices[0].message.content
+    json_dict = json.loads(json_string)
+    return json_dict

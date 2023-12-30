@@ -21,7 +21,8 @@ OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 # OPENAI_API_KEY="unsafe-secret-key-easy-to-steal"
 
 # Anki
-DECK_NAME = "ai-generated-cards"
+DEFAULT_DECKNAME = "anki-helper"
+DECKNAME = DEFAULT_DECKNAME
 
 # AnkiConnect
 ANKICONNECT_HOST="localhost"
