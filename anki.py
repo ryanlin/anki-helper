@@ -1,11 +1,20 @@
-from . import ankiconnect
+import ankiconnect
+import config
 
-DEFAULT_DECKNAME = "Default"
+DECKNAME = config.ANKI_DECKNAME or "Default"
 
 def create_deck(deckName: str) -> dict:
     params = {"deck": deckName}
     try:
         res = ankiconnect.invoke(action='createDeck',**params)
+        return res
+    except Exception:
+        raise
+
+def delete_deck(deckName: str, cardsToo: bool = True) -> dict:
+    params = {"decks": [deckName], "cardsToo": cardsToo}
+    try:
+        res = ankiconnect.invoke(action='deleteDecks',**params)
         return res
     except Exception:
         raise
@@ -24,7 +33,7 @@ def create_note_from_json(json: dict) -> dict:
     # - get LLM to fill these properly
     # - implement commands to set deckName and stuff 
     try:
-        json["deckName"] = DEFAULT_DECKNAME
+        json["deckName"] = DECKNAME
         json["fields"]["Key"] = json["fields"]["Simplified"]
         return json
     except:
