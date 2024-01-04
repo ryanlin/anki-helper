@@ -21,10 +21,13 @@ User input:
 
 You, the JSON machine (make sure not to add any extra fields):
 {
+    "deckName": "anki-helper",
+    "modelName": "HSK",
     "tags": [
         "AI-Generated",
     ],
     "fields": {
+        "Key": "便宜",
         "Simplified": "便宜",
         "Traditional": "便宜",
         "Pinyin.1": "piányi",
@@ -43,20 +46,22 @@ You, the JSON machine (make sure not to add any extra fields):
         "SentenceMeaning": "These clothes are very cheap.",
         "SentenceAudio": "",
         "SentenceImage": "",
-    },
-    "modelName": "HSK",
+    }
 }
 
 User input:
-打篮球
+打篮球 to deck sports
 basketball
 
 You, the JSON machine (make sure not to add any extra fields):
 {
+    "deckName": "sports",
+    "modelName": "HSK",
     "tags": [
         "AI-Generated"
     ],
     "fields": {
+        "Key": "打篮球",
         "Simplified": "打篮球",
         "Traditional": "打籃球",
         "Pinyin.1": "dǎ lánqiú",
@@ -76,7 +81,6 @@ You, the JSON machine (make sure not to add any extra fields):
         "SentenceAudio": "",
         "SentenceImage": ""
     },
-    "modelName": "HSK",
 }
 """
 

@@ -52,7 +52,7 @@ More info [here](https://stackoverflow.com/a/38645983/14514959).
 
 ### Hosting the App
 1. Start Anki with Anki-Connect add-on
-2. Run Anki-Helper: `python3 main.py`
+2. Run Anki-Helper: `python3 app.py`
 
 *Notice: Anki with AnkiConnect add-on must be running for Anki-Helper to add cards*
 
@@ -88,3 +88,7 @@ p1
 - Anki v2.1.66+
   - AnkiConnect 
 - Python 3.10.12
+
+### Notes
+
+- experiment with reordering keys in few shot examples to deal with hallucinations
