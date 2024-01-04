@@ -1,48 +1,53 @@
 import ankiconnect
-import config
 
-DECKNAME = config.ANKI_DECKNAME or "Default"
+def get_all_decks() -> dict:
+    try:
+        response = ankiconnect.invoke(action='deckNames')
+        data = response['result']
+        return data
+    except:
+        raise
 
-def create_deck(deckName: str) -> dict:
+def get_all_models() -> dict:
+    try:
+        response = ankiconnect.invoke(action='modelNames')
+        data = response['result']
+        return data
+    except:
+        raise
+
+def create_deck(deckName: str) -> None:
     params = {"deck": deckName}
     try:
-        res = ankiconnect.invoke(action='createDeck',**params)
-        return res
-    except Exception:
+        response = ankiconnect.invoke(action='createDeck',**params)
+        data = response['result']
+        return data
+    except:
         raise
 
 def delete_deck(deckName: str, cardsToo: bool = True) -> dict:
     params = {"decks": [deckName], "cardsToo": cardsToo}
     try:
-        res = ankiconnect.invoke(action='deleteDecks',**params)
-        return res
-    except Exception:
-        raise
-
-def add_note(note: dict) -> dict:
-    params = {"note": note}
-    try:
-        response = ankiconnect.invoke(action='addNote',**params)
-        return response
-    except Exception:
-        raise
-
-def create_note_from_json(json: dict) -> dict:
-    # bandaid fix for jsons w weird or missing mandatory note fields
-    # ideas:
-    # - get LLM to fill these properly
-    # - implement commands to set deckName and stuff 
-    try:
-        json["deckName"] = DECKNAME
-        json["fields"]["Key"] = json["fields"]["Simplified"]
-        return json
+        response = ankiconnect.invoke(action='deleteDecks',**params)
+        data = response['result']
+        return data
     except:
         raise
 
-def add_note_from_json(json: dict) -> dict:
-    note = create_note_from_json(json)
+def delete_decks(decks: list[str], cardsToo: bool = True) -> dict:
+    params = {"decks": decks, "cardsToo": cardsToo}
     try:
-        response = add_note(note)
-        return response
-    except Exception:
+        response = ankiconnect.invoke(action='deleteDecks',**params)
+        data = response['result']
+        return data
+    except:
+        raise
+
+def add_note(json: dict) -> dict:
+    params = {"note": json}
+    try:
+        response = ankiconnect.invoke(action='addNote',**params)
+        data = response['result']
+        return data
+    except:
         raise

@@ -1,6 +1,7 @@
 from openai import OpenAI
-import config
 import json
+
+import config
 
 JSON_ONLY_INSTRUCTION = "You are a helpful assistant designed to output JSON. Please respond only with JSON."
 
@@ -8,7 +9,7 @@ JSON_PROPERTIES_INSTRUCTION = "Your JSON should NOT include any fields other tha
 
 ANKI_HELPER_INSTRUCTION = "You are meant to create Anki cards based on the user input. The user input will be Chinese characters, or Chinese characters and/or pinyin and english."
 
-ANKI_DECKNAME_INSTRUCTION = f"In your JSON, include a top level property \"deckName\" with the value {config.DECKNAME}"
+ANKI_DECKNAME_INSTRUCTION = f"In your JSON, include a top level property \"deckName\" with the value {config.ANKI_DECKNAME}"
 
 ANKI_KEY_INSTRUCTION = f"In your JSON, include a property \"Key\" under \"fields\" with the same value as you would have assigned to the property \"Simplified\" that is also under \"fields\""
 
@@ -79,22 +80,21 @@ You, the JSON machine (make sure not to add any extra fields):
 }
 """
 
-client = OpenAI(api_key=config.OPENAI_API_KEY)
-
 JSON_INSTRUCTION = f"{JSON_ONLY_INSTRUCTION}\n{JSON_PROPERTIES_INSTRUCTION}\n"
 
 ANKI_INSTRUCTION = f"{ANKI_HELPER_INSTRUCTION}"
 
-system_prompt = f"{JSON_INSTRUCTION}\n{ANKI_INSTRUCTION}\n{FEW_SHOT_INSTRUCTION}\n"
+SYSTEM_PROMPT = f"{JSON_INSTRUCTION}\n{ANKI_INSTRUCTION}\n{FEW_SHOT_INSTRUCTION}"
 
-def give_me_a_json(request) -> dict:
+client = OpenAI(api_key=config.OPENAI_API_KEY)
+
+def generate_note_json(query: str) -> dict:
     completion = client.chat.completions.create(
         model="gpt-4-1106-preview",
         response_format={"type": "json_object"},
         messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"{request}"}
-        ])
-    json_string = completion.choices[0].message.content
-    json_dict = json.loads(json_string)
-    return json_dict
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": f"{query}"}])
+    note_json_str: str = completion.choices[0].message.content
+    note_json: dict = json.loads(note_json_str)
+    return note_json

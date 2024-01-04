@@ -26,12 +26,17 @@ async def add(ctx):
 
     try: 
         await ctx.send(f'Creating an example with query `{query}` . . .')
-        result, llm_response = create.generate_and_add_card(query)
-        success = result['result'] != None
-        if success:
-            await ctx.send('Done! Added **\"' + llm_response['fields']['Simplified'] + '\"** with example: ' + llm_response['fields']['SentenceSimplified'])
-        else:
-            raise result['error']
+        note_id, generated_json  = create.generate_and_add_card(query)
+
+        message = f"Done! Added **{generated_json['fields']['Simplified']}** to deck **{generated_json['deckName']}**"
+        formatted_note_info = f"""
+            ```
+            Key:\t\t {generated_json['fields']['Key']}
+            Example:\t\t {generated_json['fields']['SentenceSimplified']}
+            ```
+        """
+
+        await ctx.send(message + formatted_note_info)
     except Exception as e:
         await ctx.send(f'Uh oh, something went wrong: `'+str(e)+'`')
 
