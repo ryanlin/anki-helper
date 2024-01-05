@@ -2,15 +2,15 @@ import config
 import anki
 import llm
 
-DECKNAME = config.ANKI_DECKNAME or "Default"    
+deck_name = config.ANKI_DECKNAME or "Default"
 
 def add_missing_keys(json: dict) -> dict:
     # bandaid fix for jsons w weird or missing mandatory note fields
     # ideas:
     # - re-prompt LLM to correct errors
     # - implement commands for user to set deckName and stuff 
-    json["deckName"] = DECKNAME
-    anki.create_deck(DECKNAME)
+    json["deckName"] = deck_name
+    anki.create_deck(deck_name)
     # anki.create_model(json, modelName)
     return json
 
@@ -33,7 +33,6 @@ def generate_and_add_card(query: str):
         try:
             generated_json: dict = llm.generate_note_json(user_prompt)
             note_id: dict = anki.add_note(generated_json)
-            response = note_id, generated_json
             return note_id, generated_json
         except KeyError as e:
             print(f"Key Error: {e}. Applying bandaid...")

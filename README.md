@@ -2,7 +2,9 @@
 
 # Anki Helper
 
-Self-hosted AI assistant that creates fully detailed Chinese flashcards in Anki from just 1 word. Accessible through a Discord bot and built with OpenAI's GPT family of large language models. Available as a "developer build". WIP!
+Anki Helper is a GPT-based AI assistant that creates entire Chinese flashcards in Anki from just 1 word. Save time while watching a show and instantly create cards with pinyin, translations, and example sentences.
+
+Interfaceable through a Discord bot, the Anki Helper is currently available for self-hosting and development. WIP!
 
 **Demo**
 ![Anki-Helper Demo](demo/anki-helper-demo.gif)
@@ -15,19 +17,19 @@ Self-hosted AI assistant that creates fully detailed Chinese flashcards in Anki 
 ## Usage
 ### Prerequisites
 Programs:
-- [Anki](https://apps.ankiweb.net/)
-- [AnkiConnect add-on](https://ankiweb.net/shared/info/2055492159)
 - [Python3](https://www.python.org/downloads/)
+- [Anki](https://apps.ankiweb.net/)
+  - [AnkiConnect add-on](https://ankiweb.net/shared/info/2055492159)
 
 API Registrations and Keys
-- [Discord Bot Token](https://discord.com/developers/applications)
 - [OpenAI API Key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-api-key)
+- [Discord Bot Token](https://discord.com/developers/applications)
 
 ### Setup
 1. Install Python packages: `pip install requirements.txt`
 2. Add Tokens and Keys to environment variables. View `config.py` to see suggested variable names.
 
-If using a Python virtualenv, environment variables can be add in `<venv>/bin/activate` where `<venv>` is the directory of your virtual environment.
+If using a Python virtual environment, environment variables can be add in `<venv>/bin/activate` where `<venv>` is the directory of your virtual environment.
 
 Example environment variables in virtualenv:
 ```sh
@@ -52,7 +54,7 @@ More info [here](https://stackoverflow.com/a/38645983/14514959).
 
 ### Hosting the App
 1. Start Anki with Anki-Connect add-on
-2. Run Anki-Helper: `python3 app.py`
+2. Run Anki-Helper: `python3 src/app.py`
 
 *Notice: Anki with AnkiConnect add-on must be running for Anki-Helper to add cards*
 
@@ -69,8 +71,8 @@ Example bot command:
 
 ### Roadmap
 p0
-- ~~Create card from word using LLM.~~
-- ~~Add card to an anki deck.~~
+- [x] ~~Create card from word using LLM.~~
+- [x] ~~Add card to an anki deck.~~
 
 p1
 - Shared/Live deck collaboration.
@@ -78,11 +80,11 @@ p1
 ### Issues
 - won't create card if note type doesn't exist
 - won't create card if deck doesn't exist
-- discord gateway api starts sending loopback warnings since app responds slowly
+- discord gateway api starts sending loopback warnings when app responds slowly
 
 ### Improvements
 - easier developer setup (e.g. containerize app)
-- allow natural language instruction through bot (e.g. !add <word> with <sentence> as example)
+- [x] ~~allow natural language instruction through bot (e.g. !add <word> with <sentence> as example)~~
 
 ### Tested Configuration:
 - Anki v2.1.66+
@@ -91,4 +93,4 @@ p1
 
 ### Notes
 
-- experiment with reordering keys in few shot examples to deal with hallucinations
+- experiment with reordering keys in few shot examples to deal with hallucinations (worked out pretty well)

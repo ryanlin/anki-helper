@@ -31,8 +31,8 @@ async def add(ctx):
         message = f"Done! Added **{generated_json['fields']['Simplified']}** to deck **{generated_json['deckName']}**"
         formatted_note_info = f"""
             ```
-            Key: {generated_json['fields']['Key']}
-            Example: {generated_json['fields']['SentenceSimplified']}
+                \nKey: {generated_json['fields']['Key']}
+                \nExample: {generated_json['fields']['SentenceSimplified']}
             ```
         """
 
