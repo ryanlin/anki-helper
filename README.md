@@ -1,71 +1,65 @@
-<!-- anki-helper/README.md -->
+# AnkiHelper
 
-# Anki Helper
+AnkiHelper is a GPT-based AI assistant that creates entire Chinese flashcards in Anki from just 1 word. Save time while watching shows and instantly create cards with pinyin, translations, and example sentences.
 
-Self-hosted AI assistant that creates fully detailed Chinese flashcards in Anki from just 1 word. Accessible through a Discord bot and built with OpenAI's GPT family of large language models. Available as a "developer build". WIP!
+![Anki-Helper Demo](anki-helper-demo.gif)
 
-**Demo**
-![Anki-Helper Demo](demo/anki-helper-demo.gif)
-
+Interfaceable through a Discord bot, the Anki Helper is currently available for self-hosting and development. WIP!
 
 - [Usage](#usage)
+- [Setup](#setup)
 - [Development](#development)
 
----
 ## Usage
-### Prerequisites
-Programs:
-- [Anki](https://apps.ankiweb.net/)
-- [AnkiConnect add-on](https://ankiweb.net/shared/info/2055492159)
-- [Python3](https://www.python.org/downloads/)
 
-API Registrations and Keys
-- [Discord Bot Token](https://discord.com/developers/applications)
-- [OpenAI API Key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-api-key)
+Once the assistant is [set up](#setup), the bot can be added to the Discord server and used by all members. 
 
-### Setup
-1. Install Python packages: `pip install requirements.txt`
-2. Add Tokens and Keys to environment variables. View `config.py` to see suggested variable names.
-
-If using a Python virtualenv, environment variables can be add in `<venv>/bin/activate` where `<venv>` is the directory of your virtual environment.
-
-Example environment variables in virtualenv:
-```sh
-# .venv/bin/activate
-
-deactivate() {
-  ...
-
-  # Unset my personal local environment variables
-  # These were set at the bottom of this file
-  unset OPENAI_API_KEY
-  unset DISCORD_BOT_TOKEN
-}
-...
-
-# My personal local environment variables
-# Make sure to unset in deactivate() above
-export OPENAI_API_KEY="openai-api-secret-key"
-export DISCORD_BOT_TOKEN="discord.bot.token"
+Add cards with `!add` command
 ```
-More info [here](https://stackoverflow.com/a/38645983/14514959).
+!add 苹果
+```
+Experimental
+```
+!add 跑步 in deck sports
+```
+```
+!add 仔细 with example 他好仔细地学习
+```
+
+## Setup
+
+### API Registrations and Keys
+1. Register [OpenAI API Account and Key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-api-key)
+2. Register [Discord App and Bot Token](https://discord.com/developers/applications)
+
+### Programs
+1. Install [Python](https://www.python.org/downloads/)
+2. Install [Anki](https://apps.ankiweb.net/)
+3. Install [AnkiConnect add-on](https://ankiweb.net/shared/info/2055492159)
+4. Clone this repo
+
+### Environment
+1. Install Python packages: `pip install requirements.txt`
+2. Add Tokens and Keys to environment variables. Make sure the variable names match those in `src/config.py`
 
 ### Hosting the App
-1. Start Anki with Anki-Connect add-on
-2. Run Anki-Helper: `python3 main.py`
-
-*Notice: Anki with AnkiConnect add-on must be running for Anki-Helper to add cards*
+1. Start Anki with the Anki-Connect add-on
+2. Run Anki-Helper: `python3 src/app.py`
 
 ### Using the Discord Bot
 1. Add bot to server with [generated URL](https://discord.com/developers/docs/getting-started#step-1-creating-an-app).
-2. Start using commands in the server!
-
-Example bot command:
-```
-!add 帮手
-```
+2. Start using commands in the server! 
+    - try: `!add 加油`!
 
 ## Development
+More info on the [development page](development.md).
+### Setup
+1. Install packages: `pip install requirements.txt`
+2. Install dev packages: `pip install dev-requirements.txt`
+
+### Testing
+- Run all tests: `pytest -v`
+- Run specific test: `pytest tests\test_name.py -v`
 
 ### Roadmap
 p0
@@ -75,16 +69,8 @@ p0
 p1
 - Shared/Live deck collaboration.
 
-### Issues
-- won't create card if note type doesn't exist
-- won't create card if deck doesn't exist
-- discord gateway api starts sending loopback warnings since app responds slowly
+### Change log
 
-### Improvements
-- easier developer setup process (e.g. containerize app)
-- allow natural language instruction through bot.
-
-### Tested Configuration:
-- Anki v2.1.66+
-  - AnkiConnect 
-- Python 3.10.12
+2024-01-12
+- added wrapper module for requests to AnkiConnect
+- added basic tests
