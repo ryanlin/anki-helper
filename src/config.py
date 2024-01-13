@@ -1,30 +1,13 @@
-# anki-helper/config.py
-#
-# Edit these values to better match your setup.
+"""Variables shared between modules.
 
-# Some variables like secret keys are better stored as environment variables.
-# If using virtualenv, edit <venv>/bin/activate where <venv> is the name of your virtual environment directory.
-# in <venv>/bin/activate:
-# - at bottom of file, export environment variables
-#   - e.g. export DISCORD_BOT_TOKEN="discord.bot.token"
-# - at end of deactivate() function, unset variables
-#   - e.g. unset DISCORD_BOT_TOKEN
+Secret keys should be set as environment variables.
+"""
 
 import os
 
-# Discord
-DISCORD_BOT_TOKEN=os.getenv("DISCORD_BOT_TOKEN")
-# DISCORD_BOT_TOKEN="unsafe.bot.token.anyone.can.see"
+DISCORD_KEY = os.getenv("DISCORD_BOT_TOKEN")
+OPENAI_KEY = os.getenv("OPENAI_API_KEY")
 
-# OpenAI
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
-# OPENAI_API_KEY="unsafe-secret-key-easy-to-steal"
-
-# Anki
-ANKI_DEFAULT_DECKNAME = "anki-helper"
-ANKI_DECKNAME = ANKI_DEFAULT_DECKNAME
-
-# AnkiConnect
-ANKICONNECT_HOST="localhost"
-ANKICONNECT_PORT="8765"
-ANKICONNECT_URL = f"http://{ANKICONNECT_HOST}:{ANKICONNECT_PORT}"
+default_deckname = "anki-helper"
+default_modelname = "HSK"
+ankiconnect_url = "http://localhost:8765"

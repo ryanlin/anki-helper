@@ -1,9 +1,4 @@
-
 # local development environment stuff
 .venv/
 __pycache__/
-
-# tests
-test.py
-test*
-my_tests/
+.pytest_cache/
